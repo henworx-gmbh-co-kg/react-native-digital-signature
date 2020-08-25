@@ -46,7 +46,7 @@ import javax.security.auth.x500.X500Principal;
 import java.io.IOException;
 
 
-
+import com.facebook.react.bridge.ReadableMap;
 import org.spongycastle.asn1.ASN1InputStream;
 import org.spongycastle.asn1.ASN1Encodable;
 import org.spongycastle.asn1.ASN1ObjectIdentifier;
@@ -55,9 +55,17 @@ import org.spongycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.spongycastle.asn1.pkcs.PrivateKeyInfo;
 import org.spongycastle.asn1.pkcs.RSAPublicKey;
 import org.spongycastle.asn1.pkcs.RSAPrivateKey;
+import org.spongycastle.asn1.x500.X500Name;
+import org.spongycastle.asn1.x500.X500NameBuilder;
+import org.spongycastle.asn1.x500.style.BCStrictStyle;
+import org.spongycastle.asn1.x500.style.BCStyle;
 import org.spongycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.spongycastle.operator.ContentSigner;
 import org.spongycastle.operator.OperatorCreationException;
+import org.spongycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.spongycastle.pkcs.PKCS10CertificationRequest;
+import org.spongycastle.pkcs.PKCS10CertificationRequestBuilder;
+import org.spongycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.spongycastle.util.io.pem.PemObject;
 import org.spongycastle.util.io.pem.PemWriter;
 import org.spongycastle.util.io.pem.PemReader;
@@ -275,7 +283,7 @@ public class RSA {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
         KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keyStore.getEntry(this.keyTag, null);
-        
+
         if (privateKeyEntry != null) {
             this.privateKey = privateKeyEntry.getPrivateKey();
             this.publicKey = privateKeyEntry.getCertificate().getPublicKey();
