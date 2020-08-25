@@ -21,7 +21,7 @@ Keychain support
 
 ## Getting started
 
-`$ yarn add react-native-rsa-native`
+`$ yarn add react-native-digital-signature`
 
 or:
 
