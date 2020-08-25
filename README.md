@@ -25,7 +25,7 @@ Keychain support
 
 or:
 
-`$ npm install react-native-rsa-native --save`
+`$ npm install react-native-digital-signature --save`
 
 ## Older React-Native versions
 If you are using an older version of React Native and are having issues try using v1.1.14
@@ -111,6 +111,9 @@ Generate a public/private key pair of the given key size.
 
 #### generate
 `static generate() : Promise<KeyPair>`
+
+#### generateCSR
+`static generate(privateKey: string, publicKey: string, data: Object) : Promise<string>`
 
 Equivalent to `generateKeys(2048)`
 
