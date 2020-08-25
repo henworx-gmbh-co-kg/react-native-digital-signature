@@ -298,4 +298,23 @@ public class RNRSAModule extends ReactContextBaseJavaModule {
       }
     });
   }
+
+ @ReactMethod
+  public void generateCSR(final String privateKeyString, final String publicKeyString, final ReadableMap readableMap, final Promise promise) {
+    AsyncTask.execute(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          RSA rsa = new RSA();
+          rsa.setPublicKey(publicKeyString);
+          rsa.setPrivateKey(privateKeyString);
+          String result = rsa.generateCsrX500(readableMap);
+          promise.resolve(result);
+        } catch (Exception e) {
+          promise.reject("Error", e.getMessage());
+        }
+      }
+    });
+  }
+
 }
