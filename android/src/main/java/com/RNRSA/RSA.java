@@ -403,5 +403,24 @@ public class RSA {
         return dataToPem(CSR_HEADER, CSRder);
     }
 
+    public String generateCsrX500(ReadableMap readableMap) throws OperatorCreationException, IOException {
+            ASN1ObjectIdentifier G = new ASN1ObjectIdentifier("1.9.4");
+            X500NameBuilder namebuilder = new X500NameBuilder(X500Name.getDefaultStyle());
+            namebuilder.addRDN(BCStrictStyle.SERIALNUMBER,readableMap.getString("serialNumber"));
+                      namebuilder.addRDN(BCStyle.CN,readableMap.getString("commonName"));
+                      namebuilder.addRDN(BCStyle.SURNAME, readableMap.getString("surName"));
+                      namebuilder.addRDN(BCStyle.O, readableMap.getString("organization"));
+                      namebuilder.addRDN(BCStyle.C, readableMap.getString("country"));
+                      namebuilder.addRDN(BCStyle.L, readableMap.getString("locality"));
+                      namebuilder.addRDN(BCStyle.GIVENNAME, readableMap.getString("givenName"));
+            PrivateKey privateKey = this.getPurePrivateKey();
+            PublicKey publicKey = this.getPurePublicKey();
+            PKCS10CertificationRequestBuilder p10Builder = new JcaPKCS10CertificationRequestBuilder(namebuilder.build(),publicKey);
+            JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder("SHA1WITHRSA");
+            ContentSigner signer = csBuilder.build(privateKey);
+            PKCS10CertificationRequest request = p10Builder.build(signer);
+            final String csr = Base64.encodeToString(request.getEncoded(), Base64.DEFAULT);
+            return csr;
+        }
 }
 
