@@ -11,18 +11,19 @@ declare module 'react-native-rsa-native' {
 		private: string;
 	}
 
-	type TypeCrypto  = 
+	type TypeCrypto  =
 		'SHA256withRSA'|
 		'SHA512withRSA'|
 		'SHA1withRSA'|
 		'SHA256withECDSA'|
 		'SHA512withECDSA'|
 		'SHA1withECDSA'
-	
+
 
 	namespace RSA {
 		export function generate(): Promise<PublicKey>;
 		export function generateKeys(keySize: number): Promise<KeyPair>;
+		export function generateCSR(privateKey: string, publicKey: string, data: Object): Promise<string>;
 		export function encrypt(data: string, key: string): Promise<string>;
 		export function decrypt(data: string, key: string): Promise<string>;
 		export function encrypt64(data: string, key: string): Promise<string>;
