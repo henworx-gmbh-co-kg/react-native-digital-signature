@@ -1,4 +1,4 @@
-# react-native-rsa-native
+# react-native-digital-signature
 
 A native implementation of RSA key generation and encryption/decryption, sign/verify.
 Keychain implementation
@@ -43,7 +43,7 @@ Encrypt a message and subsequently decrypt it,
 using the RSA class in a promise chain structure.
 
 ```js
-import { RSA } from 'react-native-rsa-native';
+import { RSA } from 'react-native-digital-signature';
 
 let message = "my secret message";
 
@@ -68,7 +68,7 @@ Sign a message and subsequently verify it,
 using the RSAKeychain class in an async/await structure.
 
 ```typescript
-import { RSAKeychain } from 'react-native-rsa-native';
+import { RSAKeychain } from 'react-native-digital-signature';
 
 async main() {
     let keyTag = 'com.domain.mykey';
