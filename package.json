@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/roxanne-4731/react-native-rsa-native.git"
+    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git"
   },
   "bugs": {
-    "url": "https://github.com/roxanne-4731/react-native-rsa-native.git/issues"
+    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git/issues"
   },
   "author": {
     "name": "Roxanne"
   },
   "license": "MIT",
-  "homepage": "https://github.com/roxanne-4731/react-native-rsa-native.git#readme"
+  "homepage": "https://github.com/roxanne-4731/react-native-digital-signature.git#readme"
 }
