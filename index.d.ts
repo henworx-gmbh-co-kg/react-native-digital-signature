@@ -1,4 +1,4 @@
-declare module 'react-native-digital-signature' {
+declare module 'react-native-rsa-native' {
 	interface PublicKey {
 		public: string;
 	}
@@ -23,7 +23,6 @@ declare module 'react-native-digital-signature' {
 	namespace RSA {
 		export function generate(): Promise<PublicKey>;
 		export function generateKeys(keySize: number): Promise<KeyPair>;
-		export function generateCSR(privateKey: string, publicKey: string, data: Object): Promise<string>;
 		export function encrypt(data: string, key: string): Promise<string>;
 		export function decrypt(data: string, key: string): Promise<string>;
 		export function encrypt64(data: string, key: string): Promise<string>;
@@ -49,7 +48,7 @@ declare module 'react-native-digital-signature' {
 		export function generateEC(keyTag: string): Promise<PublicKey>;
 		export function generateCSR(keyTag: string, CN: string, signature?: TypeCrypto): Promise<CSRKey>;
 		export function generateKeys(keyTag: string, keySize: number): Promise<PublicKey>;
-		export function generateCSRWithEC(cn: String,keyTag: string, keySize: number): Promise<PublicKey & CSRKey>;
+		export function generateCSRWithEC(cn: String, O: String, C: String, ST: String, L: String, SN: String, GN: String, serialNumber: String, keyTag: string, keySize: number): Promise<PublicKey & CSRKey>;
 		export function deletePrivateKey(keyTag: string): Promise<boolean>;
 		export function encrypt(data: string, keyTag: string): Promise<string>;
 		export function decrypt(data: string, keyTag: string): Promise<string>;

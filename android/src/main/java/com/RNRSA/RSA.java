@@ -46,7 +46,7 @@ import javax.security.auth.x500.X500Principal;
 import java.io.IOException;
 
 
-import com.facebook.react.bridge.ReadableMap;
+
 import org.spongycastle.asn1.ASN1InputStream;
 import org.spongycastle.asn1.ASN1Encodable;
 import org.spongycastle.asn1.ASN1ObjectIdentifier;
@@ -55,17 +55,9 @@ import org.spongycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.spongycastle.asn1.pkcs.PrivateKeyInfo;
 import org.spongycastle.asn1.pkcs.RSAPublicKey;
 import org.spongycastle.asn1.pkcs.RSAPrivateKey;
-import org.spongycastle.asn1.x500.X500Name;
-import org.spongycastle.asn1.x500.X500NameBuilder;
-import org.spongycastle.asn1.x500.style.BCStrictStyle;
-import org.spongycastle.asn1.x500.style.BCStyle;
 import org.spongycastle.asn1.x509.SubjectPublicKeyInfo;
-import org.spongycastle.operator.ContentSigner;
 import org.spongycastle.operator.OperatorCreationException;
-import org.spongycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.spongycastle.pkcs.PKCS10CertificationRequest;
-import org.spongycastle.pkcs.PKCS10CertificationRequestBuilder;
-import org.spongycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.spongycastle.util.io.pem.PemObject;
 import org.spongycastle.util.io.pem.PemWriter;
 import org.spongycastle.util.io.pem.PemReader;
@@ -283,7 +275,7 @@ public class RSA {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
         KeyStore.PrivateKeyEntry privateKeyEntry = (KeyStore.PrivateKeyEntry) keyStore.getEntry(this.keyTag, null);
-
+        
         if (privateKeyEntry != null) {
             this.privateKey = privateKeyEntry.getPrivateKey();
             this.publicKey = privateKeyEntry.getCertificate().getPublicKey();
@@ -353,7 +345,12 @@ public class RSA {
     }
 
     @TargetApi(18)
-    public void generateCSR(String cn,String keyTag, int keySize, Context context) throws IOException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException, UnrecoverableEntryException, KeyStoreException, CertificateException {
+    public void generateCSR(String commonName, String withAlgorithm, Context context) throws IOException, OperatorCreationException {
+        this.csr = CsrHelper.generateCSR(this.publicKey, commonName, keyTag, withAlgorithm);
+    }
+
+    @TargetApi(18)
+    public void generateCSRWithEC(String cn,String keyTag, int keySize, Context context) throws IOException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException, UnrecoverableEntryException, KeyStoreException, CertificateException {
         this.deletePrivateKey();
         KeyPairGenerator kpg = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
         if (android.os.Build.VERSION.SDK_INT >= 23) {
@@ -391,7 +388,7 @@ public class RSA {
         this.publicKey = keyPair.getPublic();
 
         try {
-            this.csr = CsrHelper.generateCSR(this.publicKey, cn, keyTag);
+            this.csr = CsrHelper.generateCSRWithEC(this.publicKey, cn, keyTag);
         } catch (OperatorCreationException e) {
             e.printStackTrace();
         }
@@ -403,24 +400,5 @@ public class RSA {
         return dataToPem(CSR_HEADER, CSRder);
     }
 
-    public String generateCsrX500(ReadableMap readableMap) throws OperatorCreationException, IOException {
-            ASN1ObjectIdentifier G = new ASN1ObjectIdentifier("1.9.4");
-            X500NameBuilder namebuilder = new X500NameBuilder(X500Name.getDefaultStyle());
-            namebuilder.addRDN(BCStrictStyle.SERIALNUMBER,readableMap.getString("serialNumber"));
-                      namebuilder.addRDN(BCStyle.CN,readableMap.getString("commonName"));
-                      namebuilder.addRDN(BCStyle.SURNAME, readableMap.getString("surName"));
-                      namebuilder.addRDN(BCStyle.O, readableMap.getString("organization"));
-                      namebuilder.addRDN(BCStyle.C, readableMap.getString("country"));
-                      namebuilder.addRDN(BCStyle.L, readableMap.getString("locality"));
-                      namebuilder.addRDN(BCStyle.GIVENNAME, readableMap.getString("givenName"));
-            PrivateKey privateKey = this.getPurePrivateKey();
-            PublicKey publicKey = this.getPurePublicKey();
-            PKCS10CertificationRequestBuilder p10Builder = new JcaPKCS10CertificationRequestBuilder(namebuilder.build(),publicKey);
-            JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder("SHA1WITHRSA");
-            ContentSigner signer = csBuilder.build(privateKey);
-            PKCS10CertificationRequest request = p10Builder.build(signer);
-            final String csr = Base64.encodeToString(request.getEncoded(), Base64.DEFAULT);
-            return csr;
-        }
 }
 

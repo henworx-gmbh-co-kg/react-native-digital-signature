@@ -10,19 +10,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.ReadableMap;
-
-import org.spongycastle.asn1.ASN1ObjectIdentifier;
-import org.spongycastle.asn1.x500.X500Name;
-import org.spongycastle.asn1.x500.X500NameBuilder;
-import org.spongycastle.asn1.x500.style.BCStrictStyle;
-import org.spongycastle.asn1.x500.style.BCStyle;
-import org.spongycastle.operator.ContentSigner;
-import org.spongycastle.operator.OperatorCreationException;
-import org.spongycastle.operator.jcajce.JcaContentSignerBuilder;
-import org.spongycastle.pkcs.PKCS10CertificationRequest;
-import org.spongycastle.pkcs.PKCS10CertificationRequestBuilder;
-import org.spongycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -298,23 +285,4 @@ public class RNRSAModule extends ReactContextBaseJavaModule {
       }
     });
   }
-
- @ReactMethod
-  public void generateCSR(final String privateKeyString, final String publicKeyString, final ReadableMap readableMap, final Promise promise) {
-    AsyncTask.execute(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          RSA rsa = new RSA();
-          rsa.setPublicKey(publicKeyString);
-          rsa.setPrivateKey(privateKeyString);
-          String result = rsa.generateCsrX500(readableMap);
-          promise.resolve(result);
-        } catch (Exception e) {
-          promise.reject("Error", e.getMessage());
-        }
-      }
-    });
-  }
-
 }

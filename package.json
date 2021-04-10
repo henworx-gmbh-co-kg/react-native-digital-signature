@@ -1,28 +1,54 @@
 {
-  "name": "react-native-digital-signature",
-  "version": "0.1.4",
+  "_args": [
+    [
+      "react-native-rsa-native@2.0.3",
+      "/Users/roxannebanaei/Development/MobileDeveloper/Shakeylead"
+    ]
+  ],
+  "_from": "react-native-rsa-native@2.0.3",
+  "_id": "react-native-rsa-native@2.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-3M9U+cBMIYdvYAHImnIn1ODC948gi7A0lT9CNK3AUllD6qzRV9x+9RgPqPtAJfuC3fw6KyhP30zXaIKfAZGBHA==",
+  "_location": "/react-native-rsa-native",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-rsa-native@2.0.3",
+    "name": "react-native-rsa-native",
+    "escapedName": "react-native-rsa-native",
+    "rawSpec": "2.0.3",
+    "saveSpec": null,
+    "fetchSpec": "2.0.3"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-rsa-native/-/react-native-rsa-native-2.0.3.tgz",
+  "_spec": "2.0.3",
+  "_where": "/Users/roxannebanaei/Development/MobileDeveloper/Shakeylead",
+  "author": {
+    "name": "Amitay Molko"
+  },
+  "bugs": {
+    "url": "https://github.com/amitaymolko/react-native-rsa-native/issues"
+  },
   "description": "A native implementation of RSA key generation and encryption/decryption.",
+  "homepage": "https://github.com/amitaymolko/react-native-rsa-native#readme",
+  "keywords": [
+    "react-native",
+    "rsa"
+  ],
+  "license": "MIT",
   "main": "index.js",
-  "types": "index.d.ts",
+  "name": "react-native-rsa-native",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitaymolko/react-native-rsa-native.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "react-native",
-    "rsa",
-    "digital-signature",
-    "signature"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git"
-  },
-  "bugs": {
-    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git/issues"
-  },
-  "author": {
-    "name": "Roxanne"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/roxanne-4731/react-native-digital-signature.git#readme"
+  "types": "index.d.ts",
+  "version": "2.0.3"
 }
