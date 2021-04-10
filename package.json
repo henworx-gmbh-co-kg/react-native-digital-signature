@@ -31,20 +31,20 @@
     "name": "Amitay Molko"
   },
   "bugs": {
-    "url": "https://github.com/amitaymolko/react-native-rsa-native/issues"
+    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git/issues"
   },
   "description": "A native implementation of RSA key generation and encryption/decryption.",
-  "homepage": "https://github.com/amitaymolko/react-native-rsa-native#readme",
+  "homepage": "https://github.com/roxanne-4731/react-native-digital-signature.git#readme",
   "keywords": [
     "react-native",
     "rsa"
   ],
   "license": "MIT",
   "main": "index.js",
-  "name": "react-native-rsa-native",
+  "name": "react-native-digital-signature",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amitaymolko/react-native-rsa-native.git"
+    "url": "https://github.com/roxanne-4731/react-native-digital-signature.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
