@@ -1,4 +1,4 @@
-# react-native-rsa-native
+# react-native-digital-signature
 
 A native implementation of RSA key generation and encryption/decryption, sign/verify.
 Keychain implementation
@@ -21,11 +21,11 @@ Keychain support
 
 ## Getting started
 
-`$ yarn add react-native-rsa-native`
+`$ yarn add react-native-digital-signature`
 
 or:
 
-`$ npm install react-native-rsa-native --save`
+`$ npm install react-native-digital-signature --save`
 
 ## Older React-Native versions
 If you are using an older version of React Native and are having issues try using v1.1.14
@@ -43,7 +43,7 @@ Encrypt a message and subsequently decrypt it,
 using the RSA class in a promise chain structure.
 
 ```js
-import { RSA } from 'react-native-rsa-native';
+import { RSA } from 'react-native-digital-signature';
 
 let message = "my secret message";
 
@@ -68,7 +68,7 @@ Sign a message and subsequently verify it,
 using the RSAKeychain class in an async/await structure.
 
 ```typescript
-import { RSAKeychain } from 'react-native-rsa-native';
+import { RSAKeychain } from 'react-native-digital-signature';
 
 async main() {
     let keyTag = 'com.domain.mykey';
@@ -111,6 +111,9 @@ Generate a public/private key pair of the given key size.
 
 #### generate
 `static generate() : Promise<KeyPair>`
+
+#### generateCSR
+`static generate(privateKey: string, publicKey: string, data: Object) : Promise<string>`
 
 Equivalent to `generateKeys(2048)`
 
@@ -184,7 +187,7 @@ can verify it was signed under this key.
 Sign a given message with the private key associated with the given key tag,
 so that any user with
 the message, the returned signature, and the matching public key
-can verify it was signed under this key. The user can use __SHA256withRSA__ or __SHA512withRSA__ algorithm for signing. 
+can verify it was signed under this key. The user can use __SHA256withRSA__ or __SHA512withRSA__ algorithm for signing.
 __SHA256withRSA__ algorithm is not backward compatible on android and the user needs to generate new keypair for this to work. (available from ^1.1.0). The default is __SHA512withRSA__ and if one wishes to use __SHA512withRSA__ for signing without new keypair, then use the above sign method.
 
 

@@ -1,4 +1,4 @@
-declare module 'react-native-rsa-native' {
+declare module 'react-native-digital-signature' {
 	interface PublicKey {
 		public: string;
 	}
