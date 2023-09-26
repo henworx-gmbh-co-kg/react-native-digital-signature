@@ -1,3 +1,8 @@
+### Fork
+The library is no longer maintained, but at this time there are no good alternatives around.
+We ran into an issue with this library. It used to crash when a value couldnt be decrypted.
+This fork fixes this issue
+
 # react-native-digital-signature
 
 A native implementation of RSA key generation and encryption/decryption, sign/verify.
